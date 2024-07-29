@@ -19,7 +19,9 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        if (getIndex(resume.getUuid()) >= 0) {
+        int index = getIndex(resume.getUuid());
+        if (index >= 0) {
+            storage[index] = resume;
             System.out.println("Резюме " + resume.getUuid() + " обновлено!");
         } else {
             System.out.println("ОШИБКА: " + resume.getUuid() + " не найден!");
@@ -32,11 +34,10 @@ public class ArrayStorage {
         } else if (getIndex(resume.getUuid()) >= 0) {
             System.out.println("ОШИБКА: " + resume.getUuid() + " уже существует в системе!");
         } else {
-            if (resume.toString() != null) {
-                storage[size] = resume;
-                size++;
-                System.out.println("Резюме " + resume.getUuid() + " добавлено!");
-            }
+            storage[size] = resume;
+            size++;
+            System.out.println("Резюме " + resume.getUuid() + " добавлено!");
+            
         }
     }
 
@@ -51,7 +52,7 @@ public class ArrayStorage {
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0 && uuid.equals(storage[index].toString())) {
+        if (index >= 0) {
             storage[index] = storage[size - 1];
             storage[size - 1] = null;
             size--;
