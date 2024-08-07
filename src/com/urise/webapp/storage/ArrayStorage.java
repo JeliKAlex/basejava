@@ -21,12 +21,12 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void InsertElement(Resume resume, int index) {
+    protected void insertElement(Resume resume, int index) {
         storage[size] = resume;
     }
 
     @Override
-    protected void FillDeleteElement(int index) {
+    protected void fillDeleteElement(int index) {
         storage[index] = storage[size - 1];
     }
 }

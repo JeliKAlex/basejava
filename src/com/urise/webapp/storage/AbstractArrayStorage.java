@@ -14,7 +14,7 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
-    public void update(Resume r) {
+    public final void update(Resume r) {
         int index = getIndex(r.getUuid());
         if (index < 0) {
             System.out.println("Resume " + r.getUuid() + " not exist");
@@ -23,21 +23,21 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    public void save(Resume resume) {
+    public final void save(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (size == storage.length) {
             System.out.println("ОШИБКА: хранилище полностью заполнено, невозможно сохранить " + resume.getUuid() + "!");
         } else if (isExist(index)) {
             System.out.println("ОШИБКА: " + resume.getUuid() + " уже существует в системе!");
         } else {
-            InsertElement(resume, index);
+            insertElement(resume, index);
             size++;
             System.out.println("Резюме " + resume.getUuid() + " добавлено!");
 
         }
     }
 
-    public Resume get(String uuid) {
+    public final Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             System.out.println("Resume " + uuid + " not exist");
@@ -46,10 +46,10 @@ public abstract class AbstractArrayStorage implements Storage {
         return storage[index];
     }
 
-    public void delete(String uuid) {
+    public final void delete(String uuid) {
         int index = getIndex(uuid);
         if (isExist(index)) {
-            FillDeleteElement(index);
+            fillDeleteElement(index);
             storage[size - 1] = null;
             size--;
             System.out.println("Резюме " + uuid + " удалено!");
@@ -72,8 +72,8 @@ public abstract class AbstractArrayStorage implements Storage {
         return index >= 0 && storage[index] != null;
     }
 
-    protected abstract void InsertElement(Resume resume, int index);
+    protected abstract void insertElement(Resume resume, int index);
 
-    protected abstract void FillDeleteElement(int index);
+    protected abstract void fillDeleteElement(int index);
 }
 
