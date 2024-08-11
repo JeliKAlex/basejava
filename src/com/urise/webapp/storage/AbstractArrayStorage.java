@@ -68,11 +68,11 @@ public abstract class AbstractArrayStorage implements Storage {
         return size;
     }
 
-    protected abstract int getIndex(String uuid);
-
-    protected boolean isExist(int index) {
+    private boolean isExist(int index) {
         return index >= 0 && storage[index] != null;
     }
+
+    protected abstract int getIndex(String uuid);
 
     protected abstract void insertElement(Resume resume, int index);
 
