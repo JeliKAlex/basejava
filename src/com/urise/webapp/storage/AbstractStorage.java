@@ -1,40 +1,59 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.ExistStorageException;
+import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
-public class AbstractStorage implements Storage {
-    @Override
-    public void clear() {
+public abstract class AbstractStorage implements Storage {
 
+    protected abstract boolean isExist(Object searchKey);
+
+    protected abstract Object getSearchKey(String uuid);
+
+    protected abstract void doUpdate(Resume resume, Object searchKey);
+
+    protected abstract void doSave(Resume resume, Object searchKey);
+
+    protected abstract Resume doGet(Object searchKey);
+
+    protected abstract void doDelete(Object searchKey);
+
+    public final void update(Resume resume) {
+        Object searchKey = getExistedKey(resume.getUuid());
+        doUpdate(resume, searchKey);
+        System.out.println("Resume " + resume.getUuid() + " updated!");
     }
 
-    @Override
-    public void update(Resume r) {
-
+    public final void save(Resume resume) {
+        Object searchKey = getNotExistedKey(resume.getUuid());
+        doSave(resume, searchKey);
+        System.out.println("Resume " + resume.getUuid() + " added!");
     }
 
-    @Override
-    public void save(Resume r) {
-
+    public final Resume get(String uuid) {
+        Object searchKey = getExistedKey(uuid);
+        return doGet(searchKey);
     }
 
-    @Override
-    public Resume get(String uuid) {
-        return null;
+    public final void delete(String uuid) {
+        Object searchKey = getExistedKey(uuid);
+        doDelete(searchKey);
+        System.out.println("Resume " + uuid + " removed!");
     }
 
-    @Override
-    public void delete(String uuid) {
-
+    private Object getExistedKey(String uuid) {
+        Object searchKey = getSearchKey(uuid);
+        if (!isExist(searchKey)) {
+            throw new NotExistStorageException(uuid);
+        }
+        return searchKey;
     }
 
-    @Override
-    public Resume[] getAll() {
-        return new Resume[0];
-    }
-
-    @Override
-    public int size() {
-        return 0;
+    private Object getNotExistedKey(String uuid) {
+        Object searchKey = getSearchKey(uuid);
+        if (isExist(searchKey)) {
+            throw new ExistStorageException(uuid);
+        }
+        return searchKey;
     }
 }

@@ -1,7 +1,5 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.ExistStorageException;
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.ArrayList;
@@ -15,37 +13,34 @@ public class ListStorage extends AbstractStorage {
         list.clear();
     }
 
-    public final void update(Resume resume) {
-        int index = getIndex(resume);
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            list.add(index, resume);
+    @Override
+    protected Integer getSearchKey(String uuid) {
+        for (int i = 0; i < size(); i++) {
+            if (list.get(i).getUuid().equals(uuid)) {
+                return i;
+            }
         }
+        return null;
     }
 
-    public final Resume get(Resume resume) {
-        if (list.contains(resume)) {
-            return resume;
-        } else {
-            throw new NotExistStorageException(resume.getUuid());
-        }
+    @Override
+    protected void doUpdate(Resume resume, Object searchKey) {
+        list.set((int) searchKey, resume);
     }
 
-    public final void save(Resume resume) {
-        if (list.contains(resume)) {
-            throw new ExistStorageException(resume.getUuid());
-        }
-        list.add(resume);
+    @Override
+    protected void doSave(Resume resume, Object searchKey) {
+        list.add((int) searchKey, resume);
     }
 
-    public final void delete(Resume resume) {
-        if (list.contains(resume)) {
-            list.remove(resume);
-            System.out.println("Resume " + resume.getUuid() + " removed!");
-            return;
-        }
-        throw new NotExistStorageException(resume.getUuid());
+    @Override
+    protected Resume doGet(Object searchKey) {
+        return list.get((int) searchKey);
+    }
+
+    @Override
+    protected void doDelete(Object searchKey) {
+        list.remove((int) searchKey);
     }
 
     public Resume[] getAll() {
@@ -56,10 +51,10 @@ public class ListStorage extends AbstractStorage {
         return list.size();
     }
 
-    private int getIndex(Resume resume) {
-        return list.indexOf(resume);
+    @Override
+    protected boolean isExist(Object searchKey) {
+        return searchKey != null;
     }
-
 }
 
 
