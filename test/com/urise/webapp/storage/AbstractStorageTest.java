@@ -31,7 +31,7 @@ public abstract class AbstractStorageTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         storage.clear();
         storage.save(RESUME_1);
         storage.save(RESUME_2);
@@ -69,7 +69,6 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = StorageException.class)
     public void saveOverflow() {
-        storage.clear();
         try {
             for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
                 storage.save(new Resume());
@@ -103,6 +102,7 @@ public abstract class AbstractStorageTest {
         storage.delete(dummy);
     }
 
+    @Test
     public void getAll() {
         Resume[] expected = storage.getAll();
         assertSize(expected.length);

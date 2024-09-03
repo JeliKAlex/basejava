@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ListStorage extends AbstractStorage {
 
-    public List<Resume> list = new ArrayList<>();
+    private final List<Resume> list = new ArrayList<>();
 
     public void clear() {
         list.clear();
@@ -44,7 +44,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     public Resume[] getAll() {
-        return list.toArray(new Resume[list.size()]);
+        return list.toArray(new Resume[0]);
     }
 
     public int size() {
