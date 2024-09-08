@@ -43,8 +43,8 @@ public class ListStorage extends AbstractStorage {
         list.remove(((Integer) searchKey).intValue());
     }
 
-    public Resume[] getAll() {
-        return list.toArray(new Resume[0]);
+    public List<Resume> doCopyAll() {
+        return new ArrayList<>(list);
     }
 
     public int size() {
