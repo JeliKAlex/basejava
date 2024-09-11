@@ -25,7 +25,7 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doUpdate(Resume resume, Integer searchKey) {
-        list.set((Integer) searchKey, resume);
+        list.set(searchKey, resume);
     }
 
     @Override
@@ -35,12 +35,12 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected Resume doGet(Integer searchKey) {
-        return list.get((Integer) searchKey);
+        return list.get(searchKey);
     }
 
     @Override
     protected void doDelete(Integer searchKey) {
-        list.remove(((Integer) searchKey).intValue());
+        list.remove((searchKey).intValue());
     }
 
     public List<Resume> doCopyAll() {

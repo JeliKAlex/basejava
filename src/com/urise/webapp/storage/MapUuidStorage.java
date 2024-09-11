@@ -15,22 +15,22 @@ public class MapUuidStorage extends AbstractStorage<String> {
 
     @Override
     protected void doUpdate(Resume resume, String uuid) {
-        map.put((String) uuid, resume);
+        map.put(uuid, resume);
     }
 
     @Override
     protected void doSave(Resume resume, String uuid) {
-        map.putIfAbsent((String) uuid, resume);
+        map.putIfAbsent(uuid, resume);
     }
 
     @Override
     protected Resume doGet(String uuid) {
-        return map.get((String) uuid);
+        return map.get(uuid);
     }
 
     @Override
     protected void doDelete(String uuid) {
-        map.remove((String) uuid);
+        map.remove(uuid);
     }
 
     @Override
@@ -50,6 +50,6 @@ public class MapUuidStorage extends AbstractStorage<String> {
 
     @Override
     protected boolean isExist(String uuid) {
-        return map.containsKey((String) uuid);
+        return map.containsKey(uuid);
     }
 }
