@@ -1,23 +1,28 @@
 package com.urise.webapp.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class ListSection extends Section {
-    private final List<String> points;
+    private final List<String> items;
 
-    public ListSection(List<String> points) {
-        Objects.requireNonNull(points, "points cannot be null");
-        this.points = points;
+    public ListSection(String... items) {
+        this(Arrays.asList(items));
     }
 
-    public List<String> points() {
-        return points;
+    public ListSection(List<String> items) {
+        Objects.requireNonNull(items, "items cannot be null");
+        this.items = items;
+    }
+
+    public List<String> items() {
+        return items;
     }
 
     @Override
     public String toString() {
-        return points.toString();
+        return items.toString();
     }
 
     @Override
@@ -25,11 +30,11 @@ public class ListSection extends Section {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ListSection that = (ListSection) o;
-        return points.equals(that.points);
+        return items.equals(that.items);
     }
 
     @Override
     public int hashCode() {
-        return points.hashCode();
+        return items.hashCode();
     }
 }

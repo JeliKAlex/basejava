@@ -2,7 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
-import com.urise.webapp.model.Resume;
+import com.urise.webapp.model.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.urise.webapp.model.ResumeTestData.fillData;
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
@@ -21,10 +22,16 @@ public abstract class AbstractStorageTest {
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
 
-    private static final Resume RESUME_1 = new Resume(UUID_1, "Name 1");
-    private static final Resume RESUME_2 = new Resume(UUID_2, "Name 2");
-    private static final Resume RESUME_3 = new Resume(UUID_3, "Name 3");
-    private static final Resume RESUME_4 = new Resume(UUID_4, "Name 4");
+    private static final String FULL_NAME_1 = "Name 1";
+    private static final String FULL_NAME_2 = "Name 2";
+    private static final String FULL_NAME_3 = "Name 3";
+    private static final String FULL_NAME_4 = "Name 4";
+
+    private static Resume RESUME_1;
+    private static Resume RESUME_2;
+    private static Resume RESUME_3;
+    private static Resume RESUME_4;
+
 
     private final String dummy = "dummy";
 
@@ -34,6 +41,10 @@ public abstract class AbstractStorageTest {
 
     @Before
     public void setUp() {
+        RESUME_1 = fillData(UUID_1, FULL_NAME_1);
+        RESUME_2 = fillData(UUID_2, FULL_NAME_2);
+        RESUME_3 = fillData(UUID_3, FULL_NAME_3);
+        RESUME_4 = fillData(UUID_4, FULL_NAME_4);
         storage.clear();
         storage.save(RESUME_1);
         storage.save(RESUME_2);

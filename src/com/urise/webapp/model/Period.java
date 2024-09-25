@@ -1,13 +1,25 @@
 package com.urise.webapp.model;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Objects;
+
+import static com.urise.webapp.util.DateUtil.NOW;
+import static com.urise.webapp.util.DateUtil.of;
 
 public class Period {
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final String title;
     private final String content;
+
+    public Period(int startYear, Month startMonth, String title, String description) {
+        this(of(startYear, startMonth), NOW, title, description);
+    }
+
+    public Period(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
+        this(of(startYear, startMonth), of(endYear, endMonth), title, description);
+    }
 
     public Period(LocalDate startDate, LocalDate endDate, String title, String content) {
         Objects.requireNonNull(startDate, "startDate cannot be null");
@@ -17,6 +29,22 @@ public class Period {
         this.endDate = endDate;
         this.title = title;
         this.content = content;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     @Override

@@ -40,8 +40,12 @@ public class Resume implements Comparable<Resume> {
         return sections.get(type);
     }
 
-    public Map<SectionType, Section> sections() {
-        return sections;
+    public void setContact(ContactType type, String value) {
+        contacts.put(type, value);
+    }
+
+    public void setSection(SectionType type, Section section) {
+        sections.put(type, section);
     }
 
     @Override
