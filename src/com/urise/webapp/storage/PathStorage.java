@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class PathStorage extends AbstractStorage<Path>{
+public class PathStorage extends AbstractStorage<Path> {
     private final Path directory;
 
     private final StreamSerializer streamSerializer;
@@ -95,9 +95,9 @@ public class PathStorage extends AbstractStorage<Path>{
         return path.getFileName().toString();
     }
 
-    private Stream<Path> getFilesList(){
+    private Stream<Path> getFilesList() {
         try {
-            return  Files.list(directory);
+            return Files.list(directory);
         } catch (IOException e) {
             throw new StorageException("Directory read error", e);
         }
