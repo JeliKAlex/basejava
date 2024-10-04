@@ -3,6 +3,7 @@ package com.urise.webapp.model;
 import java.util.Objects;
 
 public class StringSection extends Section {
+    private static final long SERIAL_VERSION_UUID = 1L;
     private final String content;
 
     public StringSection(String content) {

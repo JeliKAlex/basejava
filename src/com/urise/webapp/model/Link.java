@@ -1,8 +1,10 @@
 package com.urise.webapp.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Link {
+public class Link implements Serializable {
+    private static final long SERIAL_VERSION_UUID = 1L;
     String title;
     String url;
 

@@ -2,11 +2,12 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
-import com.urise.webapp.model.*;
+import com.urise.webapp.model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import static com.urise.webapp.model.ResumeTestData.fillData;
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
+    protected static final String PATH_DIRECTORY = "D:\\Java\\javaOps\\basejava\\storage";
 
+    protected static final File STORAGE_DIRECTORY = new File("D:\\Java\\javaOps\\basejava\\storage");
     protected final Storage storage;
 
     private static final String UUID_1 = "uuid1";
