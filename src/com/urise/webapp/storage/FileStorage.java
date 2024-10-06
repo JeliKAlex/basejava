@@ -73,10 +73,7 @@ public class FileStorage extends AbstractStorage<File> {
 
     @Override
     protected List<Resume> doCopyAll() {
-        File[] files = directory.listFiles();
-        if (files == null) {
-            throw new StorageException("is not readable");
-        }
+        File[] files = getFilesList();
         List<Resume> list = new ArrayList<>(files.length);
         for (File file : files) {
             list.add(doGet(file));
@@ -86,21 +83,21 @@ public class FileStorage extends AbstractStorage<File> {
 
     @Override
     public void clear() {
-        File[] files = directory.listFiles();
-        if (files == null) {
-            throw new StorageException("is not readable");
-        }
-        for (File file : files) {
+        for (File file : getFilesList()) {
             doDelete(file);
         }
     }
 
     @Override
     public int size() {
-        String[] list = directory.list();
-        if (list == null) {
+        return getFilesList().length;
+    }
+
+    private File[] getFilesList() {
+        File[] files = directory.listFiles();
+        if (files == null) {
             throw new StorageException("is not readable");
         }
-        return list.length;
+        return files;
     }
 }
