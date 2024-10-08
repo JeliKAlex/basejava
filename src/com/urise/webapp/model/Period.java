@@ -1,5 +1,10 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -8,19 +13,25 @@ import java.util.Objects;
 import static com.urise.webapp.util.DateUtil.NOW;
 import static com.urise.webapp.util.DateUtil.of;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Period implements Serializable {
     private static final long SERIAL_VERSION_UUID = 1L;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
-    private final String title;
-    private final String content;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private LocalDate startDate;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private LocalDate endDate;
+    private String title;
+    private String content;
 
-    public Period(int startYear, Month startMonth, String title, String description) {
-        this(of(startYear, startMonth), NOW, title, description);
+    public Period() {
     }
 
-    public Period(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
-        this(of(startYear, startMonth), of(endYear, endMonth), title, description);
+    public Period(int startYear, Month startMonth, String title, String content) {
+        this(of(startYear, startMonth), NOW, title, content);
+    }
+
+    public Period(int startYear, Month startMonth, int endYear, Month endMonth, String title, String content) {
+        this(of(startYear, startMonth), of(endYear, endMonth), title, content);
     }
 
     public Period(LocalDate startDate, LocalDate endDate, String title, String content) {
@@ -30,7 +41,7 @@ public class Period implements Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
         this.title = title;
-        this.content = content;
+        this.content = content == null ? "" : content;
     }
 
     public LocalDate getStartDate() {
@@ -63,19 +74,15 @@ public class Period implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Period that = (Period) o;
-        if (!startDate.equals((that.startDate))) return false;
-        if (!endDate.equals((that.endDate))) return false;
-        if (!title.equals((that.title))) return false;
-        return content != null ? content.equals(that.content) : that.content == null;
+        Period period = (Period) o;
+        return Objects.equals(startDate, period.startDate) &&
+                Objects.equals(endDate, period.endDate) &&
+                Objects.equals(title, period.title) &&
+                Objects.equals(content, period.content);
     }
 
     @Override
     public int hashCode() {
-        int result = startDate.hashCode();
-        result = 31 * result + endDate.hashCode();
-        result = 31 * result + title.hashCode();
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        return result;
+        return Objects.hash(startDate, endDate, title, content);
     }
 }

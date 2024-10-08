@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -73,8 +74,9 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void save() {
+    public void save() throws Exception {
         storage.save(RESUME_4);
+        assertSize(4);
         assertGet(RESUME_4);
     }
 
@@ -109,8 +111,8 @@ public abstract class AbstractStorageTest {
     @Test
     public void getAllSorted() {
         List<Resume> list = storage.getAllSorted();
-        assertSize(list.size());
-        Assert.assertEquals(list, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
+        assertEquals(3, list.size());
+        assertEquals(list, new ArrayList<>(Arrays.asList(RESUME_1, RESUME_2, RESUME_3)));
     }
 
     @Test

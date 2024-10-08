@@ -1,24 +1,30 @@
 package com.urise.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Link implements Serializable {
     private static final long SERIAL_VERSION_UUID = 1L;
-    String title;
-    String url;
+    private String title;
+    private String url;
+
+    public Link() {
+    }
 
     public Link(String title, String url) {
         Objects.requireNonNull(title, "title cannot be null");
         this.title = title;
-        this.url = url;
+        this.url = url == null ? "" : url;
     }
 
-    public String title() {
+    public String getTitle() {
         return title;
     }
 
-    public String url() {
+    public String getUrl() {
         return url;
     }
 

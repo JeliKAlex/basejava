@@ -1,31 +1,39 @@
 package com.urise.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
     private static final long SERIAL_VERSION_UUID = 1L;
-    private final Link homePage;
-    private final List<Period> periods;
 
-    public Organization(String name, String url, Period... positions) {
-        this(new Link(name, url), Arrays.asList(positions));
+    private Link homePage;
+    private List<Period> periods = new ArrayList<>();
+
+    public Organization() {
     }
 
-    public Organization(Link homePage, List<Period> period) {
+    public Organization(String name, String url, Period... periods) {
+        this(new Link(name, url), Arrays.asList(periods));
+    }
+
+    public Organization(Link homePage, List<Period> periods) {
         Objects.requireNonNull(homePage, "homePage cannot be null");
-        Objects.requireNonNull(period, "startPeriod cannot be null");
+        Objects.requireNonNull(periods, "startPeriod cannot be null");
         this.homePage = homePage;
-        this.periods = period;
+        this.periods = periods;
     }
 
     public Link getHomePage() {
         return homePage;
     }
 
-    public List<Period> getPeriod() {
+    public List<Period> getPeriods() {
         return periods;
     }
 
@@ -42,13 +50,11 @@ public class Organization implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
-        return homePage.equals(that.homePage) && periods.equals(that.periods);
+        return Objects.equals(homePage, that.homePage) && Objects.equals(periods, that.periods);
     }
 
     @Override
     public int hashCode() {
-        int result = homePage.hashCode();
-        result = 31 * result + periods.hashCode();
-        return result;
+        return Objects.hash(homePage, periods);
     }
 }

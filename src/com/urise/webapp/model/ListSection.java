@@ -6,7 +6,11 @@ import java.util.Objects;
 
 public class ListSection extends Section {
     private static final long SERIAL_VERSION_UUID = 1L;
-    private final List<String> items;
+
+    private List<String> items;
+
+    public ListSection() {
+    }
 
     public ListSection(String... items) {
         this(Arrays.asList(items));
@@ -17,7 +21,7 @@ public class ListSection extends Section {
         this.items = items;
     }
 
-    public List<String> items() {
+    public List<String> getItems() {
         return items;
     }
 

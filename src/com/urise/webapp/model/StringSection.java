@@ -4,14 +4,17 @@ import java.util.Objects;
 
 public class StringSection extends Section {
     private static final long SERIAL_VERSION_UUID = 1L;
-    private final String content;
+    private String content;
+
+    public StringSection() {
+    }
 
     public StringSection(String content) {
         Objects.requireNonNull(content, "content cannot be null");
         this.content = content;
     }
 
-    public String content() {
+    public String getContent() {
         return content;
     }
 
