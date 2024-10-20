@@ -1,5 +1,6 @@
+package com.urise.webapp;
+
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -90,7 +91,7 @@ public class MainConcurrency {
 
     private void inc() {
 //        synchronized (this) {
-//        synchronized (MainConcurrency.class) {
+//        synchronized (com.urise.webapp.MainConcurrency.class) {
 //        lock.lock();
 //        try {
             atomicCounter.incrementAndGet();

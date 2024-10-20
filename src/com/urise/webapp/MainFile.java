@@ -1,3 +1,5 @@
+package com.urise.webapp;
+
 import java.io.File;
 
 public class MainFile {

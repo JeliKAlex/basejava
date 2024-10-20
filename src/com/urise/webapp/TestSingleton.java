@@ -1,3 +1,5 @@
+package com.urise.webapp;
+
 public class TestSingleton {
     private static final TestSingleton instance = new TestSingleton();
 

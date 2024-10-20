@@ -1,9 +1,9 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.Config;
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,25 +11,24 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static com.urise.webapp.model.ResumeTestData.fillData;
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
-    protected static final String PATH_DIRECTORY = "D:\\Java\\javaOps\\basejava\\storage";
-
-    protected static final File STORAGE_DIRECTORY = new File("D:\\Java\\javaOps\\basejava\\storage");
+    protected static final File STORAGE_DIRECTORY = Config.getInstance().getStorageDirectory();
     protected final Storage storage;
 
-    private static final String UUID_1 = "uuid1";
-    private static final String UUID_2 = "uuid2";
-    private static final String UUID_3 = "uuid3";
-    private static final String UUID_4 = "uuid4";
+    private static final String UUID_1 = UUID.randomUUID().toString();
+    private static final String UUID_2 = UUID.randomUUID().toString();;
+    private static final String UUID_3 = UUID.randomUUID().toString();;
+    private static final String UUID_4 = UUID.randomUUID().toString();;
 
-    private static final String FULL_NAME_1 = "Name 1";
-    private static final String FULL_NAME_2 = "Name 2";
-    private static final String FULL_NAME_3 = "Name 3";
-    private static final String FULL_NAME_4 = "Name 4";
+    private static final String FULL_NAME_1 = "Name1";
+    private static final String FULL_NAME_2 = "Name2";
+    private static final String FULL_NAME_3 = "Name3";
+    private static final String FULL_NAME_4 = "Name4";
 
     private static Resume RESUME_1;
     private static Resume RESUME_2;
@@ -57,7 +56,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume newResume = new Resume(UUID_1, "Name 1");
+        Resume newResume = new Resume(UUID_1, "Name1");
         storage.update(newResume);
         assertEquals(newResume, storage.get(UUID_1));
     }

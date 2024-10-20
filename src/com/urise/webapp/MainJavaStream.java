@@ -1,7 +1,8 @@
+package com.urise.webapp;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class MainJavaStream {
     private static final int[] values1 = {3, 2, 3, 1, 2, 3};

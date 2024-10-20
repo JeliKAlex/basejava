@@ -1,3 +1,5 @@
+package com.urise.webapp;
+
 public class LazySingleton {
     volatile private static LazySingleton INSTANCE;
 
@@ -13,11 +15,11 @@ public class LazySingleton {
         return LazySingletonHolder.INSTANCE;
     }
 
-//    public static LazySingleton getInstance() {
+//    public static com.urise.webapp.LazySingleton getInstance() {
 //        if (INSTANCE == null) {
-//            synchronized (LazySingleton.class) {
+//            synchronized (com.urise.webapp.LazySingleton.class) {
 //                if (INSTANCE == null) {
-//                    INSTANCE = new LazySingleton();
+//                    INSTANCE = new com.urise.webapp.LazySingleton();
 //                }
 //            }
 //        }
