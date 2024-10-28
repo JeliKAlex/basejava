@@ -22,7 +22,7 @@ public class SqlHelper {
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             return executor.ecexute(preparedStatement);
         } catch (SQLException e) {
-            throw  ExceptionUtil.convertException(e);
+            throw ExceptionUtil.convertException(e);
         }
     }
 

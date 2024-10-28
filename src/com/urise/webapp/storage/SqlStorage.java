@@ -42,28 +42,6 @@ public class SqlStorage implements Storage {
         });
     }
 
-    private void deleteContacts(Connection connection, Resume resume) {
-        sqlHelper.execute("DELETE  FROM contact WHERE resume_uuid=?", preparedStatement -> {
-            preparedStatement.setString(1, resume.getUuid());
-            preparedStatement.execute();
-            return null;
-        });
-    }
-
-    private void insertContact(Connection connection, Resume resume) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("" +
-                "INSERT INTO contact (resume_uuid, type, value)" +
-                "     VALUES (?,?,?)")) {
-            for (Map.Entry<ContactType, String> entry : resume.getContacts().entrySet()) {
-                preparedStatement.setString(1, resume.getUuid());
-                preparedStatement.setString(2, entry.getKey().name());
-                preparedStatement.setString(3, entry.getValue());
-                preparedStatement.addBatch();
-            }
-            preparedStatement.executeBatch();
-        }
-    }
-
 
     @Override
     public void save(Resume resume) {
@@ -103,13 +81,6 @@ public class SqlStorage implements Storage {
                 });
     }
 
-    private void addContact(ResultSet resultSet, Resume resume) throws SQLException {
-        String value = resultSet.getString("value");
-        if (value != null) {
-            resume.setContacts(ContactType.valueOf(resultSet.getString("type")), value);
-        }
-    }
-
     @Override
     public void delete(String uuid) {
         sqlHelper.<Void>execute("DELETE FROM resume WHERE uuid = ?", preparedStatement -> {
@@ -135,7 +106,7 @@ public class SqlStorage implements Storage {
                 }
             }
 
-            try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM contact")){
+            try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM contact")) {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Resume resume = resumes.get(resultSet.getString("resume_uuid"));
@@ -152,5 +123,34 @@ public class SqlStorage implements Storage {
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next() ? resultSet.getInt(1) : 0;
         });
+    }
+
+    private void deleteContacts(Connection connection, Resume resume) {
+        sqlHelper.execute("DELETE  FROM contact WHERE resume_uuid=?", preparedStatement -> {
+            preparedStatement.setString(1, resume.getUuid());
+            preparedStatement.execute();
+            return null;
+        });
+    }
+
+    private void insertContact(Connection connection, Resume resume) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("" +
+                "INSERT INTO contact (resume_uuid, type, value)" +
+                "     VALUES (?,?,?)")) {
+            for (Map.Entry<ContactType, String> entry : resume.getContacts().entrySet()) {
+                preparedStatement.setString(1, resume.getUuid());
+                preparedStatement.setString(2, entry.getKey().name());
+                preparedStatement.setString(3, entry.getValue());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+        }
+    }
+
+    private void addContact(ResultSet resultSet, Resume resume) throws SQLException {
+        String value = resultSet.getString("value");
+        if (value != null) {
+            resume.setContacts(ContactType.valueOf(resultSet.getString("type")), value);
+        }
     }
 }
