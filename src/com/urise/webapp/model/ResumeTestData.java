@@ -6,12 +6,12 @@ import java.time.Month;
 public class ResumeTestData {
     public static Resume fillData(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
-//        resume.setContacts(ContactType.MAIL, "mail1@ya.ru");
-//        resume.setContacts(ContactType.PHONE, "11111");
-//        resume.setSections(SectionType.OBJECTIVE, new StringSection("Objective1"));
-//        resume.setSections(SectionType.PERSONAL, new StringSection("Personal data"));
-//        resume.setSections(SectionType.ACHIEVEMENT, new ListSection("Achievement1", "Achievement2", "Achievement3"));
-//        resume.setSections(SectionType.QUALIFICATIONS, new ListSection("Java", "SQL", "JavaScript"));
+        resume.setContacts(ContactType.MAIL, "mail1@ya.ru");
+        resume.setContacts(ContactType.PHONE, "11111");
+        resume.setSections(SectionType.OBJECTIVE, new StringSection("Objective1"));
+        resume.setSections(SectionType.PERSONAL, new StringSection("Personal data"));
+        resume.setSections(SectionType.ACHIEVEMENT, new ListSection("Achievement1", "Achievement2", "Achievement3"));
+        resume.setSections(SectionType.QUALIFICATIONS, new ListSection("Java", "SQL", "JavaScript"));
 //        resume.setSections(SectionType.EXPERIENCE,
 //                new OrganizationSection(
 //                        new Organization("Organization1", "http://Organization1.ru",

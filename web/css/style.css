@@ -1,0 +1,14 @@
+header {
+    background: none repeat scroll 0 0 rgba(140, 86, 230, 0.74);
+    color: rgba(85, 154, 204, 0.99);
+    font-size: 20px;
+    padding: 5px 20px;
+}
+
+footer {
+    background: none repeat scroll 0 0 rgba(140, 86, 230, 0.74);
+    color: rgba(85, 154, 204, 0.99);
+    font-size: 20px;
+    padding: 5px 20px;
+    margin: 20px 0;
+}
