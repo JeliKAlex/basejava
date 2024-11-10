@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Resume implements Comparable<Resume>, Serializable {
+    public class Resume implements Comparable<Resume>, Serializable {
     private static final long SERIAL_VERSION_UUID = 1L;
 
     private String uuid;
