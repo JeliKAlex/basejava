@@ -14,6 +14,17 @@ import java.util.UUID;
     public class Resume implements Comparable<Resume>, Serializable {
     private static final long SERIAL_VERSION_UUID = 1L;
 
+    public static final Resume EMPTY = new Resume();
+
+    static {
+        EMPTY.setSections(SectionType.OBJECTIVE, StringSection.EMPTY);
+        EMPTY.setSections(SectionType.PERSONAL, StringSection.EMPTY);
+        EMPTY.setSections(SectionType.ACHIEVEMENT, ListSection.EMPTY);
+        EMPTY.setSections(SectionType.QUALIFICATIONS, ListSection.EMPTY);
+        EMPTY.setSections(SectionType.EXPERIENCE, new OrganizationSection(Organization.EMPTY));
+        EMPTY.setSections(SectionType.EDUCATION, new OrganizationSection(Organization.EMPTY));
+    }
+
     private String uuid;
     private String fullName;
 
@@ -42,6 +53,10 @@ import java.util.UUID;
         return fullName;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public Map<ContactType, String> getContacts() {
         return contacts;
     }
@@ -68,12 +83,7 @@ import java.util.UUID;
 
     @Override
     public String toString() {
-        return "Resume{" +
-                "uuid='" + uuid + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", contacts=" + contacts +
-                ", sections=" + sections +
-                '}';
+        return uuid + '(' + fullName + ')';
     }
 
     @Override

@@ -14,8 +14,12 @@ import static com.urise.webapp.util.DateUtil.NOW;
 import static com.urise.webapp.util.DateUtil.of;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Period implements Serializable {
+public class
+Period implements Serializable {
     private static final long SERIAL_VERSION_UUID = 1L;
+
+    public static final Period EMPTY = new Period();
+
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate startDate;
     @XmlJavaTypeAdapter(LocalDateAdapter.class)

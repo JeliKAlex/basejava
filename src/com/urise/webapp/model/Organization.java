@@ -12,6 +12,8 @@ import java.util.Objects;
 public class Organization implements Serializable {
     private static final long SERIAL_VERSION_UUID = 1L;
 
+    public static final Organization EMPTY = new Organization("", "", Period.EMPTY);
+
     private Link homePage;
     private List<Period> periods = new ArrayList<>();
 

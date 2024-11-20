@@ -12,30 +12,33 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=8.0">
     <title>Меню</title>
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<section>
-    <table border="1" cellpadding="8" cellspacing="0">
+<div class="listAdd">
+    <a href="resume?action=add"><img src="img/add.png"></a>
+</div>
+<div class="listMainTable">
+    <table border="none" cellpadding="8" cellspacing="0">
         <tr>
             <th>Имя</th>
-            <th>Email</th>
-            <th>Emai</th>
-            <th>Email</th>
+            <th>Контакты</th>
+            <th class="imgColumn">Редактировать</th>
+            <th class="imgColumn">Удалить</th>
         </tr>
         <c:forEach items="${resumes}" var="resume">
             <jsp:useBean id="resume" type="com.urise.webapp.model.Resume"/>
             <tr>
-                <td><a href="resume?uuid=${resume.uuid}&action=view">${resume.fullName}</a></td>
+                <td class="nameColumn"><a href="resume?uuid=${resume.uuid}&action=view">${resume.fullName}</a></td>
                 <td><%=ContactType.MAIL.toHtmlString(resume.getContact(ContactType.MAIL))%></td>
-                <td><a href="resume?uuid=${resume.uuid}&action=delete">Delete</a></td>
-                <td><a href="resume?uuid=${resume.uuid}&action=edit">Edit</a></td>
+                <td class="imgColumn"><a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a></td>
+                <td class="imgColumn"><a href="resume?uuid=${resume.uuid}&action=delete"><img src="img/delete.png"></a></td>
             </tr>
         </c:forEach>
     </table>
-</section>
+</div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

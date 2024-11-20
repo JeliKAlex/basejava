@@ -133,5 +133,4 @@ public class DataStreamSerializer implements StreamSerializer {
     private LocalDate readLocalDate(DataInputStream datais) throws IOException {
         return LocalDate.of(datais.readInt(), datais.readInt(), 1);
     }
-
 }

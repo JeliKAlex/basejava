@@ -3,9 +3,12 @@ package com.urise.webapp.model;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ListSection extends Section {
     private static final long SERIAL_VERSION_UUID = 1L;
+
+    public static final ListSection EMPTY = new ListSection("");
 
     private List<String> items;
 
@@ -18,7 +21,10 @@ public class ListSection extends Section {
 
     public ListSection(List<String> items) {
         Objects.requireNonNull(items, "items cannot be null");
-        this.items = items;
+        this.items = items.stream()
+                .map(String::trim)
+                .filter(item -> !item.isEmpty())
+                .collect(Collectors.toList());
     }
 
     public List<String> getItems() {

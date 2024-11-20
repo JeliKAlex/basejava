@@ -1,31 +1,215 @@
 header {
-    background: none repeat scroll 0 0 rgba(140, 86, 230, 0.74);
-    color: rgba(85, 154, 204, 0.99);
-    font-size: 20px;
-    padding: 5px 20px;
+    background-color: #3a275c;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-height: 25px;
+    border-bottom: 1px solid rgb(241, 141, 242);
+    box-shadow: 0 1px 5px rgb(180, 96, 181);
+    top: 0;
+    position: fixed;
+}
+
+body {
+    margin: 125px 0px 0px;
+    padding: 0;
+    background-color: #031626;
+    color: #FFFFFF;
+    font-family: Georgia;
+    line-height: 1.6;
+}
+
+div.listAdd {
+    text-align: center;
+}
+
+div.viewName {
+    background-color: #05729a;
+    margin-left: 125px;
+    max-width: 175px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0px 15px rgb(241, 141, 242);
+}
+
+button.view {
+    margin-top: 15px;
+    margin-bottom: 95px;
+    text-align: center;
+    margin-left: 1000px;
+}
+
+div.listMainTable {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+div.edit {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 75px;
+}
+
+button.edit {
+    width: 80px;
+    height: 50px;
+    padding: 5px;
+}
+
+img.edit {
+    width: 40px;
+    height: 40px;
+}
+
+table {
+    box-shadow: 0 0px 15px rgb(241, 141, 242);
+    border: none;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 700px;
+    border-collapse: collapse;
+    margin: 20 auto;
+    overflow: hidden;
+    text-align: center;
+}
+
+th, td {
+    border: none;
+    padding: 20px;
+    text-align: left;
+}
+
+.imgColumn {
+    text-align: center;
+}
+
+th {
+    color: #FFFFFF;
+}
+
+
+tbody tr:nth-child(even) {
+    background-color: #05c7f2;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #049dd9;
 }
 
 footer {
-    background: none repeat scroll 0 0 rgba(140, 86, 230, 0.74);
-    color: rgba(85, 154, 204, 0.99);
-    font-size: 20px;
-    padding: 5px 20px;
-    margin: 20px 0;
+    background-color: #3a275c;
+    color: #FFFFFF;
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+    max-height: 15px;
+    border-top: 1px solid rgb(241, 141, 242);
+    box-shadow: 0 -1px 5px rgb(180, 96, 181);
+    bottom: 0;
+    position: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: rgb(241, 141, 242);
+    text-shadow: 0 0 5px rgb(180, 96, 181), 0 0 15px rgb(180, 96, 181);
+    margin: 10px 0;
+}
+
+p {
+    color: #FFFFFF;
+    margin: 5px 0px 30px;
 }
 
 dl {
-    background: none repeat scroll 0 0 #FAFAFA;
-    margin: 8px 0;
-    padding: 0;
+    background-color: #05c7f2;
+    border: 1px solid rgb(241, 141, 242);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(180, 96, 181);
+    margin: 20px 0;
 }
 
 dt {
-    display: inline-block;
-    width: 170px;
+    color: #031626;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 dd {
-    display: inline-block;
-    margin-left: 8px;
-    vertical-align: top;
+    color: #e0e0e0;
+    margin: 0 0 10px 20px;
+    line-height: 1.5;
+}
+
+input, textarea {
+    background-color: #049dd9;
+    border: 1px solid #031626;
+    color: #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 100%;
+    transition: border 0.3s;
+}
+
+input:focus, textarea:focus {
+    border: 1px solid #ff4081;
+}
+
+a {
+    color: #031626;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a.title {
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #f18df2; /* Цвет ссылки при наведении */
+}
+
+hr {
+    color: rgb(98, 105, 248); /* Неоновая линия */
+    width: 100%;
+}
+
+button {
+    background-color: #05c7f2; /* Цвет фона кнопки */
+    color: #121212; /* Цвет текста кнопки */
+    border: none; /* Убираем рамку */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background 0.3s; /* Плавный переход */
+}
+
+button:hover {
+    background-color: #f18df2; /* Цвет фона кнопки при наведении */
+}
+
+form {
+    margin: 20px 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #2a2a2a;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #00ffcc;
+    border-radius: 5px;
+}
+
+b {
+    color: #3a275c;
 }
