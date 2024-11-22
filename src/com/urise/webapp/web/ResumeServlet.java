@@ -122,20 +122,39 @@ public class ResumeServlet extends HttpServlet {
                     break;
                 case "edit":
                     resume = storage.get(uuid);
-                    for (SectionType type : new SectionType[]{SectionType.EXPERIENCE, SectionType.EDUCATION}) {
-                        OrganizationSection section = (OrganizationSection) resume.getSection(type);
-                        List<Organization> emptyFirstOrganization = new ArrayList<>();
-                        emptyFirstOrganization.add(Organization.EMPTY);
-                        if (section != null) {
-                            for (Organization organization : section.getOrganizations()) {
-                                List<Period> emptyFirstPeriod = new ArrayList<>();
-                                emptyFirstPeriod.add(Period.EMPTY);
-                                emptyFirstPeriod.addAll(organization.getPeriods());
-                                emptyFirstOrganization.add(new Organization(organization.getHomePage(),
-                                        emptyFirstPeriod));
+                    for (SectionType type : SectionType.values()) {
+                        Section section = resume.getSection(type);
+                        switch (type) {
+                            case OBJECTIVE, PERSONAL -> {
+                                if (section == null) {
+                                    section = StringSection.EMPTY;
+                                }
+                                break;
+                            }
+                            case ACHIEVEMENT, QUALIFICATIONS -> {
+                                if (section == null) {
+                                    section = ListSection.EMPTY;
+                                }
+                                break;
+                            }
+                            case EXPERIENCE, EDUCATION -> {
+                                OrganizationSection organizationSection = (OrganizationSection) section;
+                                List<Organization> emptyFirstOrganization = new ArrayList<>();
+                                emptyFirstOrganization.add(Organization.EMPTY);
+                                if (organizationSection != null) {
+                                    for (Organization organization : organizationSection.getOrganizations()) {
+                                        List<Period> emptyFirstPeriod = new ArrayList<>();
+                                        emptyFirstPeriod.add(Period.EMPTY);
+                                        emptyFirstPeriod.addAll(organization.getPeriods());
+                                        emptyFirstOrganization.add(new Organization(organization.getHomePage(),
+                                                emptyFirstPeriod));
+                                    }
+                                }
+                                section = new OrganizationSection(emptyFirstOrganization);
+                                break;
                             }
                         }
-                        resume.setSections(type, new OrganizationSection(emptyFirstOrganization));
+                        resume.setSections(type, section);
                     }
                     break;
                 default:
