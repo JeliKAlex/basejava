@@ -25,7 +25,7 @@
         <input type="hidden" name="uuid" value="${resume.uuid}">
         <h1>Имя:</h1>
         <dl>
-            <input type="text" name="fullName" size="50" value="${resume.fullName}">
+            <input required type="text" name="fullName" size="50" value="${resume.fullName}">
         </dl>
         <h2>Контакты:</h2>
         <p>
@@ -110,7 +110,8 @@
         <hr>
         <button class="edit" type="submit"><img class="edit" src="img/save.png"></button>
         <button class="edit" onclick="window.history.back()" type="reset"
-                title="Все несохраненные данные будут потеряны">Отменить</button>
+                title="Все несохраненные данные будут потеряны">Отменить
+        </button>
     </form>
 </div>
 <jsp:include page="fragments/footer.jsp"/>
